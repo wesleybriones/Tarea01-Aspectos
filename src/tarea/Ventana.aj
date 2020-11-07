@@ -1,7 +1,5 @@
 
 package tarea;
-import java.awt.event.MouseListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -11,37 +9,59 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.*;
 
-public class Ventana extends JFrame {
-	/** The "Start Game" button */
+public class Ventana implements ActionListener {
+	
 	private JButton botonAmarillo;
-
 	private JButton botonAzul;
+	private JButton botonRojo;  
+	JFrame frame=new JFrame();   
 	
-	private JButton botonRojo;
+	public Ventana() {
+		crearVentana();  
+		configBotones();
+	}
 	
-	private JPanel guiPanel;
+	public void crearVentana(){ 
+		frame.setTitle("Tarea");
+        frame.getContentPane().setLayout(new FlowLayout());
+        frame.setVisible(true);
+        frame.setSize(300,300);
+        frame.setBackground(Color.WHITE);       
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        
+	}
 	
-	public Ventana(){
-        super("Tarea");
-        setLayout(new FlowLayout());
-        setSize(300,300);
-
-        guiPanel = new JPanel();
-        guiPanel.setBackground(Color.white);
-        add(guiPanel);
-
+	public void configBotones() {     
         botonAmarillo = new JButton("Amarillo");
-        add(botonAmarillo);
+        frame.add(botonAmarillo);
 
         botonAzul = new JButton("Azul");
-        add(botonAzul);
+        frame.add(botonAzul);
 
         botonRojo = new JButton("Rojo");
-        add(botonRojo);
-
+        frame.add(botonRojo);  
+        
+       
+        botonAzul.addActionListener(this);
+        botonAmarillo.addActionListener(this);
+        botonRojo.addActionListener(this);
     }
-		
 
+	@Override
+	public void actionPerformed(final ActionEvent e) {
+	     if(e.getSource()==botonAmarillo){
+	         frame.getContentPane().setBackground(Color.YELLOW);
+	      }
 
-	
+	      else if(e.getSource()==botonAzul)
+	      {
+	         frame.getContentPane().setBackground(Color.BLUE);
+	      }
+
+	      else if(e.getSource()==botonRojo)
+	      {
+	         frame.getContentPane().setBackground(Color.RED);
+	      }
+	  }
 }
+
